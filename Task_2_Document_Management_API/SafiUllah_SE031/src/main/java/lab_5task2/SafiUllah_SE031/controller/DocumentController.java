@@ -10,24 +10,24 @@ import org.springframework.web.multipart.MultipartFile;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/api/documents")
 public class DocumentController {
 
     @Autowired
     private DocumentService documentService;
 
-    @PostMapping("/documents/upload")
+    @PostMapping("/upload")
     public ResponseEntity<String> uploadDocument(@RequestParam("file") MultipartFile file) {
         String result = documentService.uploadDocument(file);
         return ResponseEntity.ok(result);
     }
 
-    @GetMapping("/documents")
+    @GetMapping
     public ResponseEntity<List<Document>> getAllDocuments() {
         return ResponseEntity.ok(documentService.getAllDocuments());
     }
 
-    @DeleteMapping("/documents/{id}")
+    @DeleteMapping("/{id}")
     public ResponseEntity<String> deleteDocument(@PathVariable String id) {
         String result = documentService.deleteDocument(id);
         return ResponseEntity.ok(result);
